@@ -29,13 +29,15 @@ int find_index(long long arr[], int n, long long x) {
 int main() {
     int T;
     cin >> T;
-    // Initiate a, b, c, d, the exponents of 2, 3, 5, 7 in the prime factorization of n
+    // Algorithm that generates nice numbers n <= 10^18 using balls and urns theorem
+    // Initiate a, b, c, d, the exponents of 2, 3, 5, 7, respectively, in the prime factorization of n
     int in = 0, a, b, c, d;
     long long arr[66061];
     // For loop of the possible values of a + b + c + d (0 <= a + b + c + d <= 59)
     for (int r = 0; r < 60; r++) {
         // Three for loops that perform the balls and urns algorithm
-        // Visual representation when a + b + c + d = 4: |||****, ||*|***, ..., ||****|, |*||***, ..., *|||***, ..., ****|||
+        // Visual representation when r = a + b + c + d = 4: 
+        // |||****, ||*|***, ..., ||****|, |*||***, |*|*|**, ..., |****||, ..., *|||***, ..., ****|||
         for (int i = 0; i < r + 1; i++) { // The first '|'
             for (int j = 0; j < r - i + 1; j++) { // The second '|'
                 for (int k = 0; k < r - i - j + 1; k++) { // The third '|'
@@ -57,7 +59,7 @@ int main() {
             }
         }
     }
-    // Sort the array to perform binary search and find where L and R is
+    // Sort the array to perform binary search and find where L and R are
     sort(arr, arr + 66061);
     while (T--) {
         long long L, R;
