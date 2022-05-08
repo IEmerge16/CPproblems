@@ -1,30 +1,27 @@
+bruno: A warm-up problem. If one of x and y is positive, Bruno is disqualified, otherwise, he is not.
 
-Hello! These are my solutions for the NOI.PH 2022 Elimination Round.
+paruparog: For each line from top to bottom, determine the pattern. The pattern changes depending on ith line, 0 <= i <= 2 * n.
+We have three patterns obtained from cases: i < n, i = n, i > n. Then print these line by line.
 
-P1: A warm-up problem. If one of x and y is positive, Bruno is disqualified, otherwise, he is not.
-
-P2: For each line to be printed, determine the pattern. The pattern changes depending on ith line, 0 <= i <= 2 * n.
-We have three patterns obtained from cases: i < n, i = n, i > n.
-
-P3: Create a hash map of the distinct letters of string s, to check whether a character from t exists in s. Iterate
+hashdle: Create a hash map of the distinct letters of string s, to check whether a character from t exists in s. Iterate
 through the characters in t. For 0 <= i <= n - 1, if s[i] == t[i], add "G" to the string ans. Else, if t[i] exists
 in s[i], add "Y". Otherwise, add ".".
 
-P4: It can be proven that the cost for all possible combinations is that same. Proof: By the properties of associativity,
-and distributativity multiplication, for some 0 <= i <= n - 1, a[i] is multiplied to every term a[j], j != i, once. Thus,
+slimeking: It can be proven that the cost for all possible combinations is that same. Proof: By the properties of associativity of addition,
+and distributivity of multiplication, for some 0 <= i <= n - 1, a[i] is multiplied to every term a[j], j != i, once. Thus,
 we find that the and result is the product of all possible adjacent integers, i.e., a[0]a[1] + a[0]a[2] + ... + a[n - 2]a[n - 1].
 We now just have to find a convenient way to calculate this total cost. For each 1 <= i <= n -1, monitor a sum S of the terms before 
-a[i] and add a[i] * S. This gives an end result of a[0]a[1] + a[2](a[0] + a[1]) + ... + a[n - 1](a[n - 2] + ... + a[0]) = a[0]a[1] +
-a[0]a[2] + a[1]a[2] + ... + a[n - 2]a[n - 1], the sum we derived earlier.
+a[i] and add a[i] * S to the answer. This gives an end result of a[0]a[1] + a[2](a[0] + a[1]) + ... + a[n - 1](a[n - 2] + ... + a[0]) 
+= a[0]a[1] + a[0]a[2] + a[1]a[2] + ... + a[n - 2]a[n - 1], the sum we derived earlier.
 
-P5: Note that a nice number is a number that only has 2, 3, 5, or 7, as its prime divisors. If there exist some p >= 11, prime divisors,
+nicenumbersi: Note that a nice number is a number that only has 2, 3, 5, or 7, as its prime divisors. If there exist some p >= 11, prime divisors,
 then the product would always include a number that has at least 2 digits. A naive way to check whether a number is a nice number is to
 check if its prime factor is of the form 2^a 3^b 5^c 7^d. We do this using a while loop, and dividing it by these primes until we reach
 a point where n > 1 and n cannot be divided by 2, 3, 5, or 7, or n = 1. If n = 1, then it is nice. Otherwise, not nice.
 
-P6: The algorithm in P5 is inefficient in the context of this problem. We then value generating nice numbers over filtering nice numbers
+nicenumbersii: The algorithm in P5 is inefficient in the context of this problem. We then value generating nice numbers over filtering nice numbers
 as it can be proven that the number of nice numbers is sufficiently small. This is because floor(log_2(10^18)) = 59, so at most,
 a + b + c + d can be 59. By the balls and urns theorem, the number of ways to put 59 ones in a, b, c, d is (62)C(3) = 37820. Overestimating,
-the number of nice numbers is less than 37820 * 60 < 2300000. Using the balls and urns, we can use three for loops to check all possible
-partitions for 0 <= a + b + c + d <= 59. After creating the list, sort it, and use binary search to search the index where L and R will be 
+the number of nice numbers is less than 37820 * 60 < 2300000, which is small. Using the balls and urns, we can use three for loops to check 
+all possible partitions for 0 <= a + b + c + d <= 59. After creating the list, sort it, and use binary search to search the index where L and R will be 
 on the array. We then return their positive difference + 1, to determine the number of nice numbers between L and R.
