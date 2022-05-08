@@ -9,7 +9,7 @@ in s[i], add "Y". Otherwise, add ".".
 
 slimeking: It can be proven that the cost for all possible combinations is that same. Proof: By the properties of associativity of addition,
 and distributivity of multiplication, for some 0 <= i <= n - 1, a[i] is multiplied to every term a[j], j != i, once. Thus,
-we find that the and result is the product of all possible adjacent integers, i.e., a[0]a[1] + a[0]a[2] + ... + a[n - 2]a[n - 1].
+we find that the end result is the product of all possible adjacent integers, i.e., a[0]a[1] + a[0]a[2] + ... + a[n - 2]a[n - 1].
 We now just have to find a convenient way to calculate this total cost. For each 1 <= i <= n -1, monitor a sum S of the terms before 
 a[i] and add a[i] * S to the answer. This gives an end result of a[0]a[1] + a[2](a[0] + a[1]) + ... + a[n - 1](a[n - 2] + ... + a[0]) 
 = a[0]a[1] + a[0]a[2] + a[1]a[2] + ... + a[n - 2]a[n - 1], the sum we derived earlier.
