@@ -3,7 +3,7 @@ using namespace std;
 
 // Finds where a target value (in this case, for L and R) should be in the array
 // Uses an iterative binary search algorithm
-int find_index(long long arr[], int n, long long x) {
+int find_index(long long arr[], int n, long long x, string d) {
     // Left and right pointers (bounds)
     int left = 0;
     int right = n - 1;
@@ -22,8 +22,13 @@ int find_index(long long arr[], int n, long long x) {
             right = mid - 1;
         }
     }
-    // Otherwise, return the right pointer plus 1
-    return right + 1;
+    // Otherwise, if the index is for L, return right + 1, else, just right
+    if (d == "left") {
+        return right + 1;
+    }
+    else {
+        return right;
+    }
 }
 
 int main() {
@@ -66,8 +71,8 @@ int main() {
         cin >> L >> R;
         // Represent the index where L and R, respectively, can be found in the array
         int x, y;
-        x = find_index(arr, 66061, L);
-        y = find_index(arr, 66061, R);
+        x = find_index(arr, 66061, L, "left");
+        y = find_index(arr, 66061, R, "right");
         // Print y - x + 1, the number of nice numbers between L and R
         cout << y - x + 1 << endl;
     }
