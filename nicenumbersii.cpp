@@ -4,8 +4,8 @@ using namespace std;
 const long long N = 1e18;
 
 int lower_bound(int n, vector<long long> a, long long x) {
-    int l = 0, r = n;
-    while (l < r) {
+    int l = 0, r = n - 1;
+    while (l <= r) {
         int m = l + (r - l) / 2;
         if (x <= a[m]) {
             r = m;
@@ -17,8 +17,8 @@ int lower_bound(int n, vector<long long> a, long long x) {
 }
 
 int upper_bound(int n, vector<long long> a, long long x) {
-    int l = 0, r = n;
-    while (l < r) {
+    int l = 0, r = n - 1;
+    while (l <= r) {
         int m = l + (r - l) / 2;
         if (x >= a[m]) {
             l = m + 1;
