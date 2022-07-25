@@ -34,8 +34,8 @@ We can check if N only has 2, 3, 5, 7 as its prime factors in O(N log N). While 
 for 3, 5, 7. After the loop, if N := 1, then N is nice. Otherwise, N is not nice.
 
 F. Nice Numbers (Counting)
-We use the same observation in E. Since 1 <= L, R <= 10^18, we cannot use check for all N (L <= N <= R) because this is way above
-the time limit. So, we can try to generate a list of nice numbers.
+We use the same observation in E. Since 1 <= L, R <= 10^18, we cannot check for all N (L <= N <= R) because this is way above the 
+time limit. So, we can try to generate a list of nice numbers.
 
 Claim: The number of nice numbers is relatively small (66061). 
 
