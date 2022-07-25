@@ -34,8 +34,8 @@ We can check if N only has 2, 3, 5, 7 as its prime factors in O(T log N). While 
 for 3, 5, 7. After the loop, if N := 1, then N is nice. Otherwise, N is not nice.
 
 F. Nice Numbers (Counting)
-We use the same observation in E. Since 1 <= L, R <= 10^18, we cannot check for all N (L <= N <= R) because this is way above the 
-time limit. So, we can try to generate a list of nice numbers.
+We use the same observation in E. Since L and R can be very large (1 <= L, R <= 10^18), we cannot check for all N (L <= N <= R) 
+because this is way above the time limit. An idea is to generate a list of nice numbers.
 
 Claim: The number of nice numbers is relatively small (66061). 
 
@@ -51,3 +51,20 @@ about overflowing then the product is close to 10^18. Store all of the possible 
 Use binary search to compute the number of nice numbers between L and R, inclusive, in O(log n). Take the index of the lower bound
 of L (lb) and the index of the upper bound of R (rb). The answer is rb - lb. The time complexity will be O((T log LR) + M), where 
 M is the number of possible nice numbers N (1 <= N <= 10^18).
+
+I. Nonstop Fitness Training
+Let pos be the current floor of Astrology Girl. If the operation is UP, then pos := 0 because floor 0 always becomes free. If the
+operation is FL, then pos is nondecreasing. If y = pos, then pos keeps increasing until floor pos does not have a follower. Since
+x, y can be very large (0 <= x, y <= 10^9), we cannot increment pos until floor pos does not have a follower. We can solve this in
+logarithmic time using the map data structure since we cannot store all floors i since i can be very large.
+
+If the operation is UP, we can maintain the total of x's tot. To avoid incrementing each floor by x, we can just decrease the 
+lowest floor by x. Hence, instead of storing pos = 0 after UP, store it as pos = -tot. The answer for each UP query is pos + tot.
+
+Notice that pos increases by the number of consecutive occupied floors directly above it. Let us mark each floor y. We say that 
+floors are connected with each other if the floors are marked as 1's and they are consecutive floors. For a marked floor i, bot[i]
+be the bottommost floor that is connected with i and top[i] be the topmost floor that is connected with i. If the operation is FL,
+we initialize bot[y] = y and top[y] = y. If floor y - 1 is marked, then bot[y] := bot[y - 1]. If floor y + 1 is marked, then 
+top[y] := top[y + 1]. Then, top[bot[y]] := top[y] and bot[top[y]] := bot[y]. This combines adjacent chunks of 1's into one chunk 
+of 1's. Make sure to decrease each y by tot first. The time complexity is O(n log n) because there can be at most n FL operations, 
+and there are at most n new floors. We use the map data structure for each FL operations which gives the log n factor.
