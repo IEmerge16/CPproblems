@@ -44,9 +44,9 @@ This means that there are no more than 60 * 38 * 26 * 22 = 1,304,160 possible ni
 large so the number of possible nice numbers (66061) is less than this number.
 
 We can iterate for all the possible values a, b, c, d can take (0 <= a < 60, 0 <= b < 38, 0 <= c < 26, 0 <= d < 22). Make sure to 
-stop the iteration as soon as the product is greater than 10^18 if you use the 64-bit integer data type because a long long int
-is at most 2^63 = 9,223,372,036,854,775,807 < 10^19. Since we are only multiplying 2, 3, 5, 7, we don't have to worry about
-overflows. Then, store all of the possible values in a sorted array.
+stop the iteration as soon as the product is greater than 10^18 if you use the 64-bit integer data type to avoid overflows. A long
+long int is at most 2^63 = 9,223,372,036,854,775,807 < 10^19. Since we are only multiplying 2, 3, 5, 7, we don't have to worry 
+about overflowing then the product is close to 10^18. Store all of the possible values in a sorted array.
 
 Use binary search to compute the number of nice numbers between L and R, inclusive, in O(log n). Take the lower bound of L, and
 take the upper bound of R to have consistent results.
