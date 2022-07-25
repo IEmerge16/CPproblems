@@ -1,27 +1,52 @@
-bruno: A warm-up problem. If one of x and y is positive, Bruno is disqualified, otherwise, he is not.
+A. Bruno Gets Disqualified
+If the x + y > 0, then Bruno is disqualified, so print "BruYesYesYes". Otherwise, Bruno is not disqualified, so print "BruNoNoNo".
 
-paruparog: For each line from top to bottom, determine the pattern. The pattern changes depending on ith line, 0 <= i <= 2 * n.
-We have three patterns obtained from cases: i < n, i = n, i > n. Then print these line by line.
+B. Paru-Paro G
+Determine the pattern from top to bottom. There are three intervals (0 <= i < n, i = n, n + 1 <= i < 2n) for which the ith row has 
+a specific pattern. For the first interval (0 <= i < n), there are i - 1 '.' that appear on the left and the right. Then, there is
+a '\' after the left dots and '/' after the right dots. Then, there are 2 * (n - i) + 1 ' ' in between. For the second interval 
+(i = n), the pattern is the same with the previous one except that the middle is a 'G'. For the third interval (n + 1 <= i < 2n),
+there are 2n - i '.' that appear on the left and the right. Then, there is a '\' after the left dots and '/' after the right dots.
+Then, there are i - n - 1 ' ' in between.
 
-hashdle: Create a hash map of the distinct letters of string s, to check whether a character from t exists in s. Iterate
-through the characters in t. For 0 <= i <= n - 1, if s[i] == t[i], add "G" to the string ans. Else, if t[i] exists
-in s[i], add "Y". Otherwise, add ".".
+C. Cryptographic Hashdle
+Create a hash map that determines whether a character in string t exists in string s. Iterate for each character in t from left to
+right. If t[i] = s[i], then print 'G'. If t[i] != s[i], but t[i] exists in s, then print 'Y'. Otherwise, print '.'.
 
-slimeking: It can be proven that the cost for all possible combinations is that same. Proof: By the properties of associativity of addition,
-and distributivity of multiplication, for some 0 <= i <= n - 1, a[i] is multiplied to every term a[j], j != i, once. Thus,
-we find that the end result is the product of all possible adjacent integers, i.e., a[0]a[1] + a[0]a[2] + ... + a[n - 2]a[n - 1].
-We now just have to find a convenient way to calculate this total cost. For each 1 <= i <= n -1, monitor a sum S of the terms before 
-a[i] and add a[i] * S to the answer. This gives an end result of a[0]a[1] + a[2](a[0] + a[1]) + ... + a[n - 1](a[n - 2] + ... + a[0]) 
-= a[0]a[1] + a[0]a[2] + a[1]a[2] + ... + a[n - 2]a[n - 1], the sum we derived earlier.
+D. Slime King
+Claim: For all possible ways to select the order of absorptions, the total cost is sum_{1 <= i, j <= n} {a[i]a[j]}. Hence, the
+average cost is the same as the total cost for each way.
 
-nicenumbersi: Note that a nice number is a number that only has 2, 3, 5, or 7, as its prime divisors. If there exist some p >= 11, prime divisors,
-then the product would always include a number that has at least 2 digits. A naive way to check whether a number is a nice number is to
-check if its prime factor is of the form 2^a 3^b 5^c 7^d. We do this using a while loop, and dividing it by these primes until we reach
-a point where n > 1 and n cannot be divided by 2, 3, 5, or 7, or n = 1. If n = 1, then it is nice. Otherwise, not nice.
+Proof: After picking some i (1 <= i < n), a[i] := a[i] + a[i + 1], and for all the slimes after i, we move them to the left. This 
+means that a[i] can never be multiplied to a[i + 1] after the operation. Hence, the initial terms of a, can only be multiplied to 
+the other initial terms once. Therefore, the total cost is the sum of all a[i]a[j] for all possible pairs (i, j).
 
-nicenumbersii: The algorithm in P5 is inefficient in the context of this problem. We then value generating nice numbers over filtering nice numbers
-as it can be proven that the number of nice numbers is sufficiently small. This is because floor(log_2(10^18)) = 59, so at most,
-a + b + c + d can be 59. By the balls and urns theorem, the number of ways to put 59 ones in a, b, c, d is (62)C(3) = 37820. Overestimating,
-the number of nice numbers is less than 37820 * 60 < 2300000, which is small. Using the balls and urns, we can use three for loops to check 
-all possible partitions for 0 <= a + b + c + d <= 59. After creating the list, sort it, and use binary search to search the index where L and R will be 
-on the array. We then return their positive difference + 1, to determine the number of nice numbers between L and R.
+Since all the possible ways of ordering the absorption gives the same cost, then we can pick a convenient order to calculate the 
+total cost. We can do this by iterating from i = 1 to i = n, and increasing the total cost by (a[1] + ... + a[i - 1]) * a[i].
+We can compute this in O(n) by keeping track of the current prefix sum (a[1] + ... + a[i - 1]).
+
+E. Nice Numbers (Decision)
+If a number N only has 2, 3, 5, 7 as its prime factors, then N is a nice number because we can always express N as its prime 
+factorization. If N has a prime factor with two digits (i.e. 11, 13, ...), then there will always be a number with two digits when
+we express N as the product of numbers.
+
+We can check if N only has 2, 3, 5, 7 as its prime factors in O(N log N). While N is divisible by 2, divide N by 2. Do the same 
+for 3, 5, 7. After the loop, if N := 1, then N is nice. Otherwise, N is not nice.
+
+F. Nice Numbers (Counting)
+We use the same observation in E. Since 1 <= L, R <= 10^18, we cannot use check for all N (L <= N <= R) because this is way above
+the time limit. So, we can try to generate a list of nice numbers.
+
+Claim: The number of nice numbers is relatively small (66061). 
+
+Proof: A nice number N is of the form N = (2^a)(3^b)(5^c)(7^d). Also, log_2{N} < 60, log_3{N} < 38, log_5{N} < 26, log_7{N} < 22.
+This means that there are no more than 60 * 38 * 26 * 22 = 1,304,160 possible nice numbers. Also, a, b, c, d cannot all be too 
+large so the number of possible nice numbers (66061) is less than this number.
+
+We can iterate for all the possible values a, b, c, d can take (0 <= a < 60, 0 <= b < 38, 0 <= c < 26, 0 <= d < 22). Make sure to 
+stop the iteration as soon as the product is greater than 10^18 if you use the 64-bit integer data type because a long long int
+is at most 2^63 = 9,223,372,036,854,775,807 < 10^19. Since we are only multiplying 2, 3, 5, 7, we don't have to worry about
+overflows. Then, store all of the possible values in a sorted array.
+
+Use binary search to compute the number of nice numbers between L and R, inclusive, in O(log n). Take the lower bound of L, and
+take the upper bound of R to have consistent results.
