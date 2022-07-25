@@ -7,9 +7,9 @@ int main() {
     int x, y;
     cin >> x >> y;
     if (x + y > 0) {
-        cout << "BruYesYes\n";
+        cout << "BruYesYesYes\n";
     } else {
-        cout << "BruNoNo\n";
+        cout << "BruNoNoNo\n";
     }
     return 0;
 }
