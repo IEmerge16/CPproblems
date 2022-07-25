@@ -12,7 +12,7 @@ int main() {
     }
     long long ans = 0, cur_sum = 0;
     for (int i = 0; i < n; i++) {
-        ans += (long long) cur_sum * a[i];
+        ans += cur_sum * a[i];
         cur_sum += a[i];
     }
     cout << ans << '\n';
