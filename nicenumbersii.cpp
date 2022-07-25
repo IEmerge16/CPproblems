@@ -3,8 +3,8 @@ using namespace std;
 
 const long long N = 1e18;
 
-int lower_bound(int n, vector<long long> a, long long x) {
-    int l = 0, r = n;
+int lower_bound(vector<long long> a, long long x) {
+    int l = 0, r = a.size();
     while (l < r) {
         int m = l + (r - l) / 2;
         if (x <= a[m]) {
@@ -16,8 +16,8 @@ int lower_bound(int n, vector<long long> a, long long x) {
     return l;
 }
 
-int upper_bound(int n, vector<long long> a, long long x) {
-    int l = 0, r = n;
+int upper_bound(vector<long long> a, long long x) {
+    int l = 0, r = a.size();
     while (l < r) {
         int m = l + (r - l) / 2;
         if (x >= a[m]) {
@@ -52,8 +52,8 @@ int main() {
     while (tt--) {
         long long l, r;
         cin >> l >> r;
-        int lb = lower_bound(a.size(), a, l);
-        int rb = upper_bound(a.size(), a, r);
+        int lb = lower_bound(a, l);
+        int rb = upper_bound(a, r);
         cout << rb - lb << '\n';
     }
     return 0;
