@@ -41,7 +41,7 @@ Claim: The number of nice numbers is relatively small (66061).
 
 Proof: A nice number N is of the form N = (2^a)(3^b)(5^c)(7^d). Also, log_2{N} < 60, log_3{N} < 38, log_5{N} < 26, log_7{N} < 22.
 This means that there are no more than 60 * 38 * 26 * 22 = 1,304,160 possible nice numbers. Also, a, b, c, d cannot all be too 
-large so the number of possible nice numbers (66061) is less than this number.
+large so the number of possible nice numbers (66,061) is much less than this number.
 
 We can iterate for all the possible values a, b, c, d can take (0 <= a < 60, 0 <= b < 38, 0 <= c < 26, 0 <= d < 22). Make sure to 
 stop the iteration as soon as the product is greater than 10^18 if you use the 64-bit integer data type to avoid overflows. A long
