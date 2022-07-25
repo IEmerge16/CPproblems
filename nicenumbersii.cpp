@@ -7,10 +7,10 @@ int lower_bound(int n, vector<long long> a, long long x) {
     int l = 0, r = n;
     while (l < r) {
         int m = l + (r - l) / 2;
-        if (x > a[m]) {
-            l = m + 1;
+        if (x <= a[m]) {
+            r = m;
         } else {
-            r = m + 1;
+            l = m + 1;
         }
     }
     return l;
