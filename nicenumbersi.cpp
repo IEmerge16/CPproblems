@@ -2,30 +2,28 @@
 using namespace std;
 
 int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        long long N;
-        cin >> N;
-        string ans = "not nice";
-        while (N % 2 == 0 || N % 3 == 0 || N % 5 == 0 || N % 7 == 0 || N == 1) {
-            if (N % 2 == 0) {
-                N /= 2;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        long long n;
+        cin >> n;
+        while (n % 2 == 0 || n % 3 == 0 || n % 5 == 0 || n % 7 == 0) {
+            if (n % 2 == 0) {
+                n /= 2;
             }
-            if (N % 3 == 0) {
-                N /= 3;
+            if (n % 3 == 0) {
+                n /= 3;
             }
-            if (N % 5 == 0) {
-                N /= 5;
+            if (n % 5 == 0) {
+                n /= 5;
             }
-            if (N % 7 == 0) {
-                N /= 7;
-            }
-            if (N == 1) {
-                ans = "nice";
-                break;
+            if (n % 7 == 0) {
+                n /= 7;
             }
         }
-        cout << ans << '\n';
+        cout << (n == 1 ? "nice" : "not nice") << '\n';
     }
+    return 0;
 }
