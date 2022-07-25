@@ -1,29 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long max_N = 1e18;
+const long long N = 1e18;
 
 int lower_bound(int n, vector<long long> a, long long x) {
-    int l = 0, r = n - 1;
+    int l = 0, r = n;
     while (l < r) {
-        int mid = l + (r - l) / 2;
-        if (x <= a[mid]) {
-            r = mid;
+        int m = l + (r - l) / 2;
+        if (x > a[m]) {
+            l = m + 1;
         } else {
-            l = mid + 1;
+            r = m + 1;
         }
     }
     return l;
 }
 
 int upper_bound(int n, vector<long long> a, long long x) {
-    int l = 0, r = n - 1;
+    int l = 0, r = n;
     while (l < r) {
-        int mid = l + (r - l) / 2;
-        if (x >= a[mid]) {
-            l = mid + 1;
+        int m = l + (r - l) / 2;
+        if (x >= a[m]) {
+            l = m + 1;
         } else {
-            r = mid;
+            r = m;
         }
     }
     return l;
@@ -34,19 +34,19 @@ int main() {
     cin.tie(0);
     vector<long long> a; // precalc nice numbers
     long long p2 = 1;
-    for (int i = 0; i <= 59 && p2 <= max_N; i++, p2 *= 2) {
+    for (int i = 0; i <= 59 && p2 <= N; i++, p2 *= 2) {
         long long p3 = 1;
-        for (int j = 0; j <= 37 && p2 * p3 <= max_N; j++, p3 *= 3) {
+        for (int j = 0; j <= 37 && p2 * p3 <= N; j++, p3 *= 3) {
             long long p5 = 1;
-            for (int k = 0; k <= 25 && p2 * p3 * p5 <= max_N; k++, p5 *= 5) {
+            for (int k = 0; k <= 25 && p2 * p3 * p5 <= N; k++, p5 *= 5) {
                 long long p7 = 1;
-                for (int l = 0; l <= 21 && p2 * p3 * p5 * p7 <= max_N; l++, p7 *= 7) {
+                for (int l = 0; l <= 21 && p2 * p3 * p5 * p7 <= N; l++, p7 *= 7) {
                     a.push_back(p2 * p3 * p5 * p7);
                 }
             }
         }
     }
-    sort(a.begin(), a.end());
+    sort(a.begin(), a.end()); // sort to do binary search
     int tt;
     cin >> tt;
     while (tt--) {
