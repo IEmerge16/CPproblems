@@ -23,15 +23,13 @@ int main() {
             ans += repeat(2 * (n - i) + 1, ' ');
             ans += '/';
             ans += repeat(i - 1, '.');
-        }
-        else if (i == n) {
+        } else if (i == n) {
             ans += repeat(n - 1, '.');
             ans += '\\';
             ans += 'G';
             ans += '/';
             ans += repeat(n - 1, '.');
-        }
-        else {
+        } else {
             ans += repeat(2 * n - i, '.');
             ans += '/';
             ans += repeat(i - n - 1, ' ');
