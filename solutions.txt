@@ -30,7 +30,7 @@ If a number N only has 2, 3, 5, 7 as its prime factors, then N is a nice number 
 factorization. If N has a prime factor with two digits (i.e. 11, 13, ...), then there will always be a number with two digits when
 we express N as the product of numbers.
 
-We can check if N only has 2, 3, 5, 7 as its prime factors in O(N log N). While N is divisible by 2, divide N by 2. Do the same 
+We can check if N only has 2, 3, 5, 7 as its prime factors in O(T log N). While N is divisible by 2, divide N by 2. Do the same 
 for 3, 5, 7. After the loop, if N := 1, then N is nice. Otherwise, N is not nice.
 
 F. Nice Numbers (Counting)
@@ -49,4 +49,5 @@ long int is at most 2^63 = 9,223,372,036,854,775,807 < 10^19. Since we are only 
 about overflowing then the product is close to 10^18. Store all of the possible values in a sorted array.
 
 Use binary search to compute the number of nice numbers between L and R, inclusive, in O(log n). Take the index of the lower bound
-of L (lb) and the index of the upper bound of R (rb). The answer is rb - lb.
+of L (lb) and the index of the upper bound of R (rb). The answer is rb - lb. The time complexity will be O((T log N) + M), where 
+M is the number of nice numbers N (1 <= N <= 10^18).
