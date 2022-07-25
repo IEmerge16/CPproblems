@@ -7,8 +7,8 @@ int main() {
     int n;
     cin >> n;
     map<long long, bool> sub;
-    map<long long, long long> below;
-    map<long long, long long> above;
+    map<long long, long long> bot;
+    map<long long, long long> top;
     long long pos = 0, tot = 0;
     for (int i = 0; i < n; i++) {
         string s;
@@ -24,23 +24,23 @@ int main() {
             cin >> y;
             long long cur = y - tot;
             sub[cur] = true;
-            below[cur] = cur;
-            above[cur] = cur;
+            bot[cur] = cur;
+            top[cur] = cur;
             if (sub[cur - 1] && sub[cur + 1]) {
-                below[cur] = below[cur - 1];
-                above[cur] = above[cur + 1];
-                above[cur - 1] = above[cur];
-                below[cur + 1] = below[cur];
+                bot[cur] = bot[cur - 1];
+                top[cur] = top[cur + 1];
+                top[cur - 1] = top[cur];
+                bot[cur + 1] = bot[cur];
             } else if (sub[cur - 1]) {
-                below[cur] = below[cur - 1];
-                above[cur - 1] = above[cur];
+                bot[cur] = bot[cur - 1];
+                top[cur - 1] = top[cur];
             } else if (sub[cur + 1]) {
-                above[cur] = above[cur + 1];
-                below[cur + 1] = below[cur];
+                top[cur] = top[cur + 1];
+                bot[cur + 1] = bot[cur];
             }
             if (sub[pos]) {
-                cout << above[pos] - pos + 1 << '\n';
-                pos = above[pos] + 1;
+                cout << top[pos] - pos + 1 << '\n';
+                pos = top[pos] + 1;
             } else {
                 cout << 0 << '\n';
             }
