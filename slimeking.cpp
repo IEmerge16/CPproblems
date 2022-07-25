@@ -2,16 +2,19 @@
 using namespace std;
 
 int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     int n;
     cin >> n;
-    int a[n];
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    long long sum = 0, ans = 0;
-    for (int i = 1; i < n; i++) {
-        sum += a[i - 1];
-        ans += a[i] * sum;
+    long long ans = 0, cur_sum = 0;
+    for (int i = 0; i < n; i++) {
+        ans += (long long) cur_sum * a[i];
+        cur_sum += a[i];
     }
-    cout << ans;
+    cout << ans << '\n';
+    return 0;
 }
