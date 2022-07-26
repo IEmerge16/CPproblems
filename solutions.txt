@@ -65,8 +65,8 @@ lowest floor by x. Hence, instead of storing pos = 0 after UP, store it as pos =
 
 Notice that if y = pos, pos increases by the number of consecutive occupied floors directly above it plus one. Let us mark each 
 floor y. We say that floors are connected with each other if the floors are marked and they are consecutive floors. For a marked 
-floor i, bot[i] be the bottommost floor that is connected with i and top[i] be the topmost floor that is connected with i. If the 
-operation is FL, we initialize bot[y] = y and top[y] = y. If floor y - 1 is marked, then bot[y] := bot[y - 1]. If floor y + 1 is 
-marked, then top[y] := top[y + 1]. Then, top[bot[y]] := top[y] and bot[top[y]] := bot[y]. This combines adjacent chunks of 1's 
+floor i, let bot[i] be the bottommost floor that is connected with i and top[i] be the topmost floor that is connected with i. If 
+the operation is FL, we initialize bot[y] = y and top[y] = y. If floor y - 1 is marked, then bot[y] := bot[y - 1]. If floor y + 1 
+is marked, then top[y] := top[y + 1]. Then, top[bot[y]] := top[y] and bot[top[y]] := bot[y]. This combines adjacent chunks of 1's 
 into one chunk of 1's. Make sure to decrease each y by tot first. The time complexity is O(n log n) because there can be at most n
 FL operations, and there are at most n new floors. We use the map data structure for each FL operations which is logarithmic.
