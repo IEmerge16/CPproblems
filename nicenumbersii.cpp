@@ -3,11 +3,11 @@ using namespace std;
 
 const long long max_n = 1e18;
 
-int lower_bound(vector<long long> nice_nums, long long x) {
-    int low = 0, high = nice_nums.size();
+int lower_bound(vector<long long> arr, long long x) {
+    int low = 0, high = arr.size();
     while (low < high) {
         int mid = low + (high - low) / 2;
-        if (x <= nice_nums[mid]) {
+        if (x <= arr[mid]) {
             high = mid;
         } else {
             low = mid + 1;
@@ -16,11 +16,11 @@ int lower_bound(vector<long long> nice_nums, long long x) {
     return low;
 }
 
-int upper_bound(vector<long long> nice_nums, long long x) {
-    int low = 0, high = nice_nums.size();
+int upper_bound(vector<long long> arr, long long x) {
+    int low = 0, high = arr.size();
     while (low < high) {
         int mid = low + (high - low) / 2;
-        if (x >= nice_nums[mid]) {
+        if (x >= arr[mid]) {
             low = mid + 1;
         } else {
             high = mid;
