@@ -1,47 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long N = 1e18;
+const long long max_n = 1e18;
 
-int lower_bound(vector<long long> a, long long x) {
-    int d = 0, r = a.size();
-    while (d < r) {
-        int m = d + (r - d) / 2;
-        if (x <= a[m]) {
-            r = m;
+int lower_bound(vector<long long> nice_nums, long long x) {
+    int low = 0, high = nice_nums.size();
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (x <= nice_nums[mid]) {
+            high = mid;
         } else {
-            d = m + 1;
+            low = mid + 1;
         }
     }
-    return d;
+    return low;
 }
 
-int upper_bound(vector<long long> a, long long x) {
-    int d = 0, r = a.size();
-    while (d < r) {
-        int m = d + (r - d) / 2;
-        if (x >= a[m]) {
-            d = m + 1;
+int upper_bound(vector<long long> nice_nums, long long x) {
+    int low = 0, high = nice_nums.size();
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (x >= nice_nums[mid]) {
+            low = mid + 1;
         } else {
-            r = m;
+            high = mid;
         }
     }
-    return d;
+    return low;
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    vector<long long> a; // precalc nice numbers
+    vector<long long> nice_nums;
     long long p2 = 1;
-    while (p2 <= N) {
+    while (p2 <= max_n) {
         long long p3 = 1;
-        while (p2 * p3 <= N) {
+        while (p2 * p3 <= max_n) {
             long long p5 = 1;
-            while (p2 * p3 * p5 <= N) {
+            while (p2 * p3 * p5 <= max_n) {
                 long long p7 = 1;
-                while (p2 * p3 * p5 * p7 <= N) {
-                    a.push_back(p2 * p3 * p5 * p7);
+                while (p2 * p3 * p5 * p7 <= max_n) {
+                    nice_nums.push_back(p2 * p3 * p5 * p7);
                     p7 *= 7;
                 }
                 p5 *= 5;
@@ -50,14 +50,14 @@ int main() {
         }
         p2 *= 2;
     }
-    sort(a.begin(), a.end()); // sort to do binary search
+    sort(nice_nums.begin(), nice_nums.end());
     int tt;
     cin >> tt;
     while (tt--) {
-        long long d, r;
-        cin >> d >> r;
-        int lb = lower_bound(a, d);
-        int rb = upper_bound(a, r);
+        long long l, r;
+        cin >> l >> r;
+        int lb = lower_bound(nice_nums, l);
+        int rb = upper_bound(nice_nums, r);
         cout << rb - lb << '\n';
     }
     return 0;
