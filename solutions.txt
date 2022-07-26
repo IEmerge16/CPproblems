@@ -17,9 +17,11 @@ D. Slime King
 Claim: For all possible ways to select the order of absorptions, the total cost is sum_{1 <= i, j <= n} {a[i]a[j]}. Hence, the
 average cost is the same as the total cost for each way.
 
-Proof: After picking some i (1 <= i < n), a[i] := a[i] + a[i + 1], and for all the slimes after i, we move them to the left. This 
-means that a[i] can never be multiplied to a[i + 1] after the operation. Hence, the initial terms of a, can only be multiplied to 
-the other initial terms once. Therefore, the total cost is the sum of all a[i]a[j] for all possible pairs (i, j).
+Proof: Since all initial terms of a is combined in the final operation, each initial term is multiplied to the other initial terms
+at least once. After picking some i (1 <= i < a.size()), a[i] := a[i] + a[i + 1], delete a[i + 1], and for all the slimes after i,
+move them to the left. This means that a[i] can never be multiplied to a[i + 1] after the operation. Hence, the initial terms of 
+a, can only be multiplied to the other initial terms once. Therefore, the total cost is the sum of all a[i]a[j] for all possible 
+pairs (i, j).
 
 Since all the possible ways of ordering the absorption gives the same cost, then we can pick a convenient order to calculate the 
 total cost. We can do this by iterating from i = 1 to i = n, and increasing the total cost by (a[1] + ... + a[i - 1]) * a[i].
@@ -30,23 +32,23 @@ If a number N only has 2, 3, 5, 7 as its prime factors, then N is a nice number 
 factorization. If N has a prime factor with two digits (i.e. 11, 13, ...), then there will always be a number with two digits when
 we express N as the product of numbers.
 
-We can check if N only has 2, 3, 5, 7 as its prime factors in O(T log N). While N is divisible by 2, divide N by 2. Do the same 
+We can check if N only has 2, 3, 5, 7 as its prime factors in O(log N). While N is divisible by 2, divide N by 2. Do the same 
 for 3, 5, 7. After the loop, if N := 1, then N is nice. Otherwise, N is not nice.
 
 F. Nice Numbers (Counting)
 We use the same observation in E. Since L and R can be very large (1 <= L, R <= 10^18), we cannot check for all N (L <= N <= R) 
 because this is way above the time limit. An idea is to generate a list of nice numbers.
 
-Claim: The number of nice numbers is relatively small (66061). 
+Claim: The number of nice numbers is relatively small (66,061). 
 
 Proof: A nice number N is of the form N = (2^a)(3^b)(5^c)(7^d). Also, log_2{N} < 60, log_3{N} < 38, log_5{N} < 26, log_7{N} < 22.
 This means that there are no more than 60 * 38 * 26 * 22 = 1,304,160 possible nice numbers. Also, a, b, c, d cannot all be too 
 large so the number of possible nice numbers (66,061) is much less than this number.
 
 We can iterate for all the possible values a, b, c, d can take (0 <= a < 60, 0 <= b < 38, 0 <= c < 26, 0 <= d < 22). Make sure to 
-stop the iteration as soon as the product is greater than 10^18 if you use the 64-bit integer data type to avoid overflows. A long
-long int is at most 2^63 = 9,223,372,036,854,775,807 < 10^19. Since we are only multiplying 2, 3, 5, 7, we don't have to worry 
-about overflowing then the product is close to 10^18. Store all of the possible values in a sorted array.
+reset the iteration as soon as the product is greater than 10^18 if you use the 64-bit integer data type to avoid overflows. A 
+long long int is at most 2^63 = 9,223,372,036,854,775,807 < 10^19. Since we are only multiplying 2, 3, 5, 7, we don't have to 
+worry about overflowing when the product is close to 10^18. Store all of the possible values in a sorted array.
 
 Use binary search to compute the number of nice numbers between L and R, inclusive, in O(log n). Take the index of the lower bound
 of L (lb) and the index of the upper bound of R (rb). The answer is rb - lb. The time complexity will be O((T log LR) + M), where 
