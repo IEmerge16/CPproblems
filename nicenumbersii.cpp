@@ -3,32 +3,6 @@ using namespace std;
 
 const long long max_n = 1e18;
 
-int lower_bound(vector<long long> arr, long long x) {
-    int low = 0, high = arr.size();
-    while (low < high) {
-        int mid = low + (high - low) / 2;
-        if (x <= arr[mid]) {
-            high = mid;
-        } else {
-            low = mid + 1;
-        }
-    }
-    return low;
-}
-
-int upper_bound(vector<long long> arr, long long x) {
-    int low = 0, high = arr.size();
-    while (low < high) {
-        int mid = low + (high - low) / 2;
-        if (x >= arr[mid]) {
-            low = mid + 1;
-        } else {
-            high = mid;
-        }
-    }
-    return low;
-}
-
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
@@ -56,9 +30,9 @@ int main() {
     while (tt--) {
         long long l, r;
         cin >> l >> r;
-        int lb = lower_bound(nice_nums, l);
-        int rb = upper_bound(nice_nums, r);
-        cout << rb - lb << '\n';
+        auto it_l = lower_bound(nice_nums.begin(), nice_nums.end(), l);
+        auto it_r = upper_bound(nice_nums.begin(), nice_nums.end(), r);
+        cout << (int) (it_r - it_l) << '\n';
     }
     return 0;
 }
