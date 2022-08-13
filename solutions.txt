@@ -14,14 +14,14 @@ Create a hash map that determines whether a character in string t exists in stri
 right. If t[i] = s[i], then print 'G'. If t[i] != s[i], but t[i] exists in s, then print 'Y'. Otherwise, print '.'.
 
 D. Slime King
-Claim: For all possible ways to select the order of absorptions, the total cost is sum_{1 <= i, j <= n} {a[i]a[j]}. Hence, the
+Claim: For all possible ways to select the order of absorptions, the total cost is sum_{1 <= i < j <= n} {a[i]a[j]}. Hence, the
 average cost is the same as the total cost for each way.
 
 Proof: Since all initial terms of a is combined in the final operation, each initial term is multiplied to the other initial terms
 at least once. After picking some i (1 <= i < a.size()), a[i] := a[i] + a[i + 1], delete a[i + 1], and for all the slimes after i,
 move them to the left. This means that a[i] can never be multiplied to a[i + 1] after the operation. Hence, the initial terms of 
 a, can only be multiplied to the other initial terms once. Therefore, the total cost is the sum of all a[i]a[j] for all possible 
-pairs (i, j).
+pairs (i, j) such that i < j.
 
 Since all the possible ways of ordering the absorption gives the same cost, then we can pick a convenient order to calculate the 
 total cost. We can do this by iterating from i = 1 to i = n, and increasing the total cost by (a[1] + ... + a[i - 1]) * a[i].
